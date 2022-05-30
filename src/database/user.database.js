@@ -15,12 +15,11 @@ export default {
     return res;
   },
   async create({ name, email, idProfile, password }) {
-    console.log(name, email, idProfile, password)
     const res = await models.user.create({
       u_name: name,
       u_email: email,
       u_profile: idProfile,
-      u_password: await passwordHelper.encrypt(password)
+      u_password: password
     });
 
     return res;
@@ -34,7 +33,7 @@ export default {
 
     return res;
   },
-  async modify({ idUser }, { name, email, idProfile }) { console.log('sdfsd')
+  async modify({ idUser }, { name, email, idProfile }) { 
     const res = await models.user.update(
       {
         u_name: name,

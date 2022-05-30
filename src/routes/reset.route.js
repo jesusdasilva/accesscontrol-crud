@@ -6,7 +6,7 @@ const route = Router();
 route
   .get("/", controller.list)
   .post("/", controller.create)
-  .get("/:idRset", controller.find)
+  .get("/:idReset", controller.find)
   .put("/:idReset", controller.modify)
   .delete("/:idReset", controller.delete);
 

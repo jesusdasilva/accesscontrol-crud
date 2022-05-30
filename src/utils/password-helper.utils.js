@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import _ from 'lodash'
 
-export async function encrypt(password) {
+export async function passwordEncrypt(password) {
     password = _.isString(password) ? password : Object.toString(password)
 
     const salt = bcrypt.genSaltSync(10)
@@ -10,7 +10,12 @@ export async function encrypt(password) {
     return encrypted
 }
 
-export async function compare(password, hash) {
+export async function passwordCompare(password, hash) {
     
     return  await bcrypt.compare(password, hash)
+}
+
+export function randonCode() {
+    
+    return _.random(1000, 9999).toString()
 }

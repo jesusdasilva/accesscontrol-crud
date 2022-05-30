@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { user as dao } from "../database";
 import { MESSAGE } from "../configs/constants.config";
+import { passwordEncrypt } from "../utils/password-helper.utils";
 
 const NAME = "User";
 
@@ -15,7 +16,7 @@ export default {
   async create({ name, email, idProfile, password }) { 
     const httpStatus = StatusCodes.OK;
     const message = MESSAGE.CRUD.CREATE.replace("NAME", NAME);
-    const data = await dao.create({ name, email, idProfile, password });
+    const data = await dao.create({ name, email, idProfile, password: await passwordEncrypt(password) });
 
     return { httpStatus, data, message };
   },
