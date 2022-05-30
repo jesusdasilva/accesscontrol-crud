@@ -29,7 +29,7 @@ export default {
 
     return res;
   },
-  async modify({ idUser }, { name, email, idProfile }) { console.log('sdfsd')
+  async modify({ idUser }, { name, email, idProfile }) {
     const res = await models.reset.update(
       {
         u_name: name,
