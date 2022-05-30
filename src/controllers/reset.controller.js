@@ -1,9 +1,9 @@
 import { reset as service } from "../services";
 
 export default {
-  async list  (_, res, next) {
+  async list  ({query}, res, next) {
     try {
-      res.locals = await service.list();
+      res.locals = await service.list(query);
       next();
     } catch (error) {
       next(error);
@@ -25,7 +25,7 @@ export default {
       next(error);
     }
   },
-  async modify  ({ params, body }, res) {
+  async modify  ({ params, body }, res, next) {
     try {
       res.locals = await service.modify(params, body);
       next();
@@ -33,7 +33,7 @@ export default {
       next(error);
     }
   },
-  async delete  ({ params }, res)  {
+  async delete  ({ params }, res, next)  {
     try {
       res.locals = await service.delete(params);
       next();
