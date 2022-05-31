@@ -7,7 +7,7 @@ route
   .get("/", controller.list)
   .post("/", controller.create)
   .get("/:idReset", controller.find)
-  .put("/:idReset", controller.modify)
+  .patch("/:idReset", controller.modifyActive)
   .delete("/:idReset", controller.delete);
 
 export default route;

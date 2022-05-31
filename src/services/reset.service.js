@@ -27,19 +27,19 @@ export default {
 
     return { httpStatus, data, message };
   },
-  async modify({ idUser }, { idRequestBy, active }) {
+  async modifyActive({ idReset }) { 
     const httpStatus = StatusCodes.OK;
     const message = MESSAGE.CRUD.MODIFY.replace("NAME", NAME);
     const data =
-      (await dao.modify({ idUser }, { idRequestBy, active })) &&
-      (await dao.find({ idUser }));
+      (await dao.modifyActive({ idReset }, { active: false })) &&
+      (await dao.find({ idReset }));
 
     return { httpStatus, data, message };
   },
-  async delete({ idUser }) {
+  async delete({ idReset }) {
     const httpStatus = StatusCodes.OK;
     const message = MESSAGE.CRUD.DELETE.replace("NAME", NAME);
-    const data = (await dao.delete({ idUser })) && {};
+    const data = (await dao.delete({ idReset })) && {};
 
     return { httpStatus, data, message };
   }

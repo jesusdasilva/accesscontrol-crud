@@ -1,6 +1,5 @@
 import initModels from "../models/init-models";
 import { conn } from "../configs/conn.config";
-import * as passwordHelper from "../utils/password-helper.utils";
 
 const models = initModels(conn);
 
@@ -29,42 +28,25 @@ export default {
 
     return res;
   },
-  async modify({ idUser }, { name, email, idProfile }) {
+  async modifyActive({ idReset }, { active }) {
     const res = await models.reset.update(
       {
-        u_name: name,
-        u_email: email,
-        u_profile: idProfile,
-        u_updated_at: new Date()
+        r_active: active,
+        r_updated_at: new Date()
       },
       {
         where: {
-          u_id: idUser
+          r_id: idReset
         }
       }
     );
 
     return res;
   },
-  async modifyPassword({ idUser }, { password }) {
-    const res = await models.reset.update(
-      {
-        u_password: await passwordHelper.encrypt(password),
-        u_updated_at: new Date()
-      },
-      {
-        where: {
-          u_id: idUser
-        }
-      }
-    );
-
-    return res;
-  },
-  async delete({ idUser }) {
+  async delete({ idReset }) {
     const res = await models.reset.destroy({
       where: {
-        u_id: idUser
+        r_id: idReset
       }
     });
 

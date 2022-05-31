@@ -25,9 +25,9 @@ export default {
       next(error);
     }
   },
-  async modify  ({ params, body }, res, next) {
+  async modifyActive  ({ params }, res, next) {
     try {
-      res.locals = await service.modify(params, body);
+      res.locals = await service.modifyActive(params);
       next();
     } catch (error) {
       next(error);
