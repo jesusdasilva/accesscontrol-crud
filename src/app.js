@@ -10,7 +10,7 @@ const app = express();
 app.use(cors({ origin: ORIGIN_URL }));
 app.use(json());
 
-app.use("/api/v1/profile", profile, responseFormat);
+app.use("/api/v1/profile",profile, responseFormat);
 app.use("/api/v1/user", user, responseFormat);
 app.use("/api/v1/reset", reset, responseFormat);
 
