@@ -22,5 +22,15 @@ export const MESSAGE = {
         FIND: "NAME found",
         MODIFY: "NAME modified",
         DELETE: "NAME deleted" 
-    }
+    },
+    VALIDATOR:{
+        REQUIRED: "The NAME is required",
+        NOT_EMPTY: "The NAME can not be empty",
+        NOT_NUMERIC: "The NAME must not be numeric",
+        IS_STRING: "The NAME must be a string",
+        NOT_BOOLEAN: "The NAME must be a boolean",
+        NOT_NULL: "The NAME must not be null",
+        NOT_UNDEFINED: "The NAME must not be undefined",
+        NOT_EMAIL: "The NAME must be a valid email",
+    },
 }

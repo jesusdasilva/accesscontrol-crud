@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { profile as controller } from "../controllers";
-import { validatorCreate } from "../validators/profile.validation";
+import validator from "../validators/profile.validator";
 
 const router = Router();
 
 router
-  .get("/", controller.list)
-  .post("/", validatorCreate, controller.create)
-  .get("/:idProfile", controller.find)
+  .get("/", validator.list, controller.list)
+  .post("/", validator.create, controller.create)
+  .get("/:idProfile", validator.find, controller.find)
   .put("/:idProfile", controller.modify)
   .delete("/:idProfile", controller.delete);
 
