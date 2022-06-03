@@ -27,6 +27,7 @@ export const MESSAGE = {
         REQUIRED: "The NAME is required",
         IS_STRING: "The NAME must be a string",
         IS_NUMERIC: "The NAME must be a number",
+        IS_EMAIL: "The NAME must be a valid email",
         NOT_EMPTY: "The NAME can not be empty",
         NOT_NUMERIC: "The NAME must not be numeric",
         NOT_BOOLEAN: "The NAME must be a boolean",
