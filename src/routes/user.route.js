@@ -6,10 +6,10 @@ const route = Router();
 
 route
   .get("/", validator.list, controller.list)
-  .post("/", controller.create)
-  .get("/:idUser", controller.find)
-  .put("/:idUser", controller.modify)
-  .patch("/:idUser", controller.modifyPassword)
-  .delete("/:idUser", controller.delete);
+  .post("/", validator.create, controller.create)
+  .get("/:idUser", validator.find, controller.find)
+  .put("/:idUser", validator.modify, controller.modify)
+  .patch("/:idUser", validator.modifyPassword, controller.modifyPassword)
+  .delete("/:idUser", validator.remove, controller.delete);
 
 export default route;

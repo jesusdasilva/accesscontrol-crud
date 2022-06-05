@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js",
-    "start": "babel-node src/server.js"
+    "dev": "NODE_ENV=development nodemon --exec babel-node src/server.js",
+    "build": "babel src --out-dir dist",
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "author": "Jesús Dasilva <jesusdasilva@gmail.com>",
   "license": "ISC",

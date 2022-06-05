@@ -2,12 +2,14 @@ import { StatusCodes } from "http-status-codes";
 import { MESSAGE } from "../configs/constants.config";
 
 function getMessageError(err){
-  const type = {
-    "SequelizeUniqueConstraintError": MESSAGE.DATABASE.DUPLICATE_VALUE,
-    "ValidationError": err.msg.map(e => e.msg).toString()
+  switch (err.name) {
+    case "SequelizeUniqueConstraintError":
+      return MESSAGE.DATABASE.DUPLICATE_VALUE;
+    case "ValidationError":
+      return err.msg.map(e => e.msg).toString();
+    default:
+      return MESSAGE.DATABASE.UNKNOWN_ERROR;
   }
-  
-  return type[err.name] || MESSAGE.ERROR.SOMETHING_WRONG;
 }
 
 export default function errorHandler(err, req, res, next) {

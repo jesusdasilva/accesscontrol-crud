@@ -2,7 +2,6 @@ import { check } from "express-validator";
 import { validateResults } from "../utils/handle-validator.util";
 import { MESSAGE } from "../configs/constants.config";
 
-/* A validation for the query params. */
 const checkQuery = [
   check("email")
     .optional()
@@ -18,10 +17,8 @@ const checkQuery = [
     .bail()
     .isNumeric()
     .withMessage(MESSAGE.VALIDATOR.IS_NUMERIC.replace("NAME", "idProfile"))
-    .bail()
 ];
 
-/* A validation for the name field. */
 const checkName = [
   check("name")
     .exists()
@@ -41,6 +38,7 @@ const checkEmail = [
     .bail()
     .isEmail()
     .withMessage(MESSAGE.VALIDATOR.IS_STRING.replace("NAME", "email"))
+    .bail()
     .notEmpty()
     .withMessage(MESSAGE.VALIDATOR.NOT_EMPTY.replace("NAME", "email"))
 ];
@@ -50,44 +48,68 @@ const checkIdPrfile = [
     .exists()
     .withMessage(MESSAGE.VALIDATOR.REQUIRED.replace("NAME", "idProfile"))
     .bail()
-    .isNumeric()
-    .withMessage(MESSAGE.VALIDATOR.IS_NUMERIC.replace("NAME", "idProfile"))
+    .isString()
+    .withMessage(MESSAGE.VALIDATOR.IS_STRING.replace("NAME", "idProfile"))
     .bail()
     .notEmpty()
     .withMessage(MESSAGE.VALIDATOR.NOT_EMPTY.replace("NAME", "idProfile"))
 ];
 
+const checkPassword = [
+  check("password")
+    .exists()
+    .withMessage(MESSAGE.VALIDATOR.REQUIRED.replace("NAME", "password"))
+    .bail()
+    .isString()
+    .withMessage(MESSAGE.VALIDATOR.IS_STRING.replace("NAME", "password"))
+    .bail()
+    .notEmpty()
+    .withMessage(MESSAGE.VALIDATOR.NOT_EMPTY.replace("NAME", "password"))
+];
 
+const checkIdUser = [
+  check("idUser")  
+    .exists()
+    .withMessage(MESSAGE.VALIDATOR.REQUIRED.replace("NAME", "idUser"))
+    .bail()
+    .isNumeric()
+    .withMessage(MESSAGE.VALIDATOR.IS_NUMERIC.replace("NAME", "idUser"))
+    .bail()
+    .notEmpty()
+    .withMessage(MESSAGE.VALIDATOR.NOT_EMPTY.replace("NAME", "idUser"))
+];
 
 const list = [checkQuery, (req, res, next) => validateResults(req, res, next)];
 
-// const create = [
-//   checkName,
-//   checkDescription,
-//   (req, res, next) => validateResults(req, res, next)
-// ];
+const create = [
+  checkIdUser,
+  checkName,
+  checkEmail,
+  checkIdPrfile,
+  (req, res, next) => validateResults(req, res, next)
+];
 
-// const find = [
-//   checkIdPrfile,
-//   (req, res, next) => validateResults(req, res, next)
-// ];
+const find = [checkIdUser, (req, res, next) => validateResults(req, res, next)];
 
-// const modify = [
-//   checkIdPrfile,
-//   checkName,
-//   checkDescription,
-//   (req, res, next) => validateResults(req, res, next)
-// ];
+const modify = [
+  checkIdUser, 
+  checkName, 
+  checkEmail, 
+  checkPassword, 
+  (req, res, next) => validateResults(req, res, next)
+];
 
-// const remove = [
-//   checkIdPrfile,
-//   (req, res, next) => validateResults(req, res, next)
-// ];
+const modifyPassword = [
+  checkIdUser,
+  checkPassword,
+  (req, res, next) => validateResults(req, res, next)
+];
 
 export default {
   list,
-  // create,
-  // find,
-  // modify,
-  // remove
+  create,
+  find,
+  modify,
+  modifyPassword,
+  remove: find
 };

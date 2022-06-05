@@ -5,10 +5,10 @@ import { MESSAGE } from "../configs/constants.config";
 const NAME = "Profile";
 
 export default {
-  async list({name}) {
+  async list({ name }) {
     const httpStatus = StatusCodes.OK;
     const message = MESSAGE.CRUD.LIST.replace("NAME", NAME);
-    const data = await dao.findAll({name});
+    const data = await dao.findAll({ name });
 
     return { httpStatus, data, message };
   },

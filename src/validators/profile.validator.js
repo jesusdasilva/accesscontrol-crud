@@ -54,23 +54,16 @@ const checkDescription = [
     .withMessage(MESSAGE.VALIDATOR.NOT_EMPTY.replace("NAME", "description"))
 ];
 
-/* A middleware that validates the query string. */
 const list = [checkQuery, (req, res, next) => validateResults(req, res, next)];
 
-/* A middleware that validates the name and description fields. */
 const create = [
   checkName,
   checkDescription,
   (req, res, next) => validateResults(req, res, next)
 ];
 
-/* A middleware that validates the idProfile field. */
-const find = [
-  checkIdPrfile,
-  (req, res, next) => validateResults(req, res, next)
-];
+const find = [ checkIdPrfile, (req, res, next) => validateResults(req, res, next)];
 
-/* A middleware that validates the idProfile, name and description fields. */
 const modify = [
   checkIdPrfile,
   checkName,
@@ -78,17 +71,10 @@ const modify = [
   (req, res, next) => validateResults(req, res, next)
 ];
 
-/* A middleware that validates the idProfile field. */
-const remove = [
-  checkIdPrfile,
-  (req, res, next) => validateResults(req, res, next)
-];
-
-/* Exporting the functions as an object. */
 export default {
   list,
   create,
   find,
   modify,
-  remove
+  remove: find
 };
